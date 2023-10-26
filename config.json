@@ -1,0 +1,7 @@
+{
+  "host": "localhost",
+  "user": "dshchepin",
+  "database": "usof",
+  "password": "securepass",
+  "port": 3001
+}
