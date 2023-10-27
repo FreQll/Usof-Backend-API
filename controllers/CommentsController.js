@@ -13,10 +13,10 @@ class CommentsController {
       .then((result) => {
         res.status(200).send(result);
       })
-      .catch((err) => {
+      .catch(() => {
         res
-          .status(500)
-          .send({ status: 500, code: err.code, message: err.message });
+          .status(404)
+          .send({ status: 404, message: "Comment does not exist!" });
       });
   }
 
@@ -76,7 +76,7 @@ class CommentsController {
       const like = new Like();
       const result = await like.findCommentLike(user_id, id);
 
-      if (result[0].length > 0) {
+      if (result) {
         return res.status(400).send({
           status: 400,
           message: "You can't like a comment twice!",
@@ -181,7 +181,6 @@ class CommentsController {
     const user = new User();
     try {
       const userResult = await user.findByLogin(userData.login);
-      //await console.log(userResult[0].user_id + " USER ID");
 
       const result = await like.findCommentLike(userResult[0].user_id, id);
       if (result[0].length > 0) {
@@ -196,8 +195,6 @@ class CommentsController {
           comment.rating =
             Number(ratingResult[0].rating) + (type === "like" ? -1 : 1);
           await comment.save();
-
-          //await console.log(comment.author_id + " AUTHOR ID");
 
           const updateUserRating = new User();
           await updateUserRating.find(comment.author_id);

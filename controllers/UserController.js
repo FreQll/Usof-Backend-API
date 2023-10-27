@@ -130,7 +130,7 @@ class UserController {
         const filePath = process.cwd() + "/images/avatars/" + avatar;
         fs.access(filePath, fs.constants.F_OK, (err) => {
           if (err) {
-            defaultFilePath = process.cwd() + "/images/default.jpg";
+            const defaultFilePath = process.cwd() + "/images/default.jpg";
             fs.copyFile(defaultFilePath, filePath, (err) => {
               if (err) {
                 return res.status(500).send("Error copying file");
@@ -271,11 +271,9 @@ class UserController {
     const { id } = req.params;
     const decoded = await jwt.verify(req.cookies.token, process.env.SECRET_KEY);
     try {
-      console.log(decoded);
       const user = new User();
       await user.findByLogin(decoded.login);
       const favorite = new Favorite();
-      console.log(id, user.user_id);
       await favorite.saveFavorite(id, user.user_id);
       res
         .status(200)

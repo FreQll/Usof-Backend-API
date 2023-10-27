@@ -15,7 +15,6 @@ const checkRightsForPost = async (req, res, next) => {
       await post
         .find(id)
         .then((result) => {
-          console.log(result?.author_id, userEntity.user_id);
           if (!result) {
             return next(res.status(401).send("No such post!"));
           }
@@ -27,7 +26,6 @@ const checkRightsForPost = async (req, res, next) => {
           return next(res.status(401).send("No such post!"));
         });
     }
-    console.log("next");
     return next();
   } catch (err) {
     return next(res.status(401).send("Invalid Token"));

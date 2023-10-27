@@ -34,8 +34,6 @@ class CategoriesController {
     const limit = pageSize ? parseInt(pageSize) : 5;
     const offset = (currentPage - 1) * limit;
 
-    //console.log(currentPage, limit, offset)
-
     const category = new Category();
     category
       .getPostsByCategory(id, limit, offset)

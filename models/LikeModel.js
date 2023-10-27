@@ -1,6 +1,5 @@
 const Model = require("./model.js");
 const db = require("./db.js");
-const { post } = require("../routes/UserRouter.js");
 
 class Like extends Model {
   constructor(post_id = 0, user_id = 0, comment_id = 0, type = "like") {
@@ -41,11 +40,10 @@ class Like extends Model {
     const selectQ = `SELECT * FROM likes WHERE user_id = ${user_id} AND comment_id = ${comment_id};`;
     try {
       const results = await db.query(selectQ);
-      console.log(results)
       if (results[0].length > 0) {
         return results;
       }
-      throw new Error("No like found");
+      return null;
     } catch (error) {
       throw error;
     }

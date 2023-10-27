@@ -114,7 +114,6 @@ class PostController {
     try {
       const user = new User();
       await user.find(author_id);
-      console.log(user);
       if (!user.user_id) {
         return res.status(404).send({
           status: 404,
@@ -124,9 +123,8 @@ class PostController {
       }
       const post = new Post(title, content, author_id);
       await post.save();
-      await console.log(await post.find(await post.getLastPostId()));
+
       const post_id = await post.getLastPostId();
-      //console.log(categories);
       if (Array.isArray(categories)) {
         categories.forEach(async (category) => {
           await post.save_categories(post_id, category);
