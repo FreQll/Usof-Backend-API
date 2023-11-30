@@ -11,6 +11,8 @@
 > command  ```mysql -u (your username in mysql) -p < db.sql``` , then
 > you can run application by simply executing   ```node index.js```
 
+
+Postman Collection https://www.postman.com/supply-physicist-98705787/workspace/public/collection/29388355-5a18b6fa-a220-4a17-85d1-285b120bb24c?action=share&creator=29388355
   
 
 # Endpoints:
